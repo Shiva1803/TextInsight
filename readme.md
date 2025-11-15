@@ -2,6 +2,10 @@
 
 TextInsight is a transformer-driven NLP system that performs sentiment classification, thematic zero-shot categorization, summarization, token-level explainability, and dataset-level analytics. The project integrates multiple pre-trained transformer models into a unified pipeline and provides an interactive Streamlit dashboard for real-time analysis.
 
+<p align="center">
+  <img width="700" alt="Image" src="https://github.com/user-attachments/assets/3d6ead4a-2e61-4381-a852-7057c338d498" />
+</p>
+
 ## Overview
 
 The system analyzes user-generated text such as reviews, feedback, comments, and short documents. Using modern transformer models, it can:
