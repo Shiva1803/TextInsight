@@ -1,20 +1,25 @@
-TextInsight: Transformer-Based Sentiment and Thematic Analysis System
+# TextInsight: Transformer-Based Sentiment and Thematic Analysis System
 
 TextInsight is a transformer-driven NLP system that performs sentiment classification, thematic zero-shot categorization, text summarization, explainability, and dataset-level analytics. The application integrates multiple pre-trained models into a unified pipeline and provides an interactive Streamlit dashboard for analysis.
 
-Overview
+## Overview
 
 The system is designed to analyze user-generated text such as reviews, feedback, and short documents. It uses modern transformer architectures to:
 
 • Classify sentiment
+
 • Identify themes using zero-shot inference
+
 • Generate summaries
+
 • Provide token-level explanations
+
 • Support batch-level analytics and visualization
+
 
 Both single-text and CSV-based analysis workflows are supported.
 
-Key Features
+## Key Features
 1. Sentiment Analysis
 
 Uses the DistilBERT SST-2 model (distilbert-base-uncased-finetuned-sst-2-english) to classify text as Positive or Negative.
@@ -30,11 +35,17 @@ Uses BART-large-MNLI (facebook/bart-large-mnli) for theme prediction without any
 
 Supports customizable domains such as:
 • Education
+
 • Technology
+
 • Healthcare
+
 • Finance
+
 • Entertainment
+
 • AI
+
 • User Experience
 
 Outputs include the top theme, theme confidence, and a score breakdown for all candidate themes.
@@ -79,7 +90,7 @@ Includes utilities to compute:
 
 Useful for validating system performance on labeled datasets.
 
-Models Used
+## Models Used
 Sentiment Model
 
 distilbert-base-uncased-finetuned-sst-2-english
