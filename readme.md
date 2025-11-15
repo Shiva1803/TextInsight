@@ -1,125 +1,113 @@
 # TextInsight: Transformer-Based Sentiment and Thematic Analysis System
 
-TextInsight is a transformer-driven NLP system that performs sentiment classification, thematic zero-shot categorization, text summarization, explainability, and dataset-level analytics. The application integrates multiple pre-trained models into a unified pipeline and provides an interactive Streamlit dashboard for analysis.
+TextInsight is a transformer-driven NLP system that performs sentiment classification, thematic zero-shot categorization, summarization, token-level explainability, and dataset-level analytics. The project integrates multiple pre-trained transformer models into a unified pipeline and provides an interactive Streamlit dashboard for real-time analysis.
 
 ## Overview
 
-The system is designed to analyze user-generated text such as reviews, feedback, and short documents. It uses modern transformer architectures to:
+The system analyzes user-generated text such as reviews, feedback, comments, and short documents. Using modern transformer models, it can:
 
-• Classify sentiment
+- Classify sentiment  
+- Identify themes using zero-shot inference  
+- Generate concise summaries  
+- Provide token-level explanations  
+- Support batch-level analytics and visualizations  
 
-• Identify themes using zero-shot inference
-
-• Generate summaries
-
-• Provide token-level explanations
-
-• Support batch-level analytics and visualization
-
-
-Both single-text and CSV-based analysis workflows are supported.
+Both single-text and CSV-based workflows are supported.
 
 ## Key Features
-1. Sentiment Analysis
 
-Uses the DistilBERT SST-2 model (distilbert-base-uncased-finetuned-sst-2-english) to classify text as Positive or Negative.
+### 1. Sentiment Analysis  
+Model: **distilbert-base-uncased-finetuned-sst-2-english**  
+Outputs:
+- Sentiment label (Positive/Negative)  
+- Confidence score  
+- Token-level explanation using attention-based scoring  
 
-Outputs include:
-• Sentiment label
-• Confidence score
-• Token-level explanation using attention-based scoring
+### 2. Thematic Classification (Zero-Shot)
 
-2. Thematic Classification (Zero-Shot)
+Model: **facebook/bart-large-mnli**  
+Predicts themes without additional training.
 
-Uses BART-large-MNLI (facebook/bart-large-mnli) for theme prediction without any fine-tuning.
+Supported domains:
+- Education  
+- Technology  
+- Healthcare  
+- Finance  
+- Entertainment  
+- AI  
+- User Experience  
 
-Supports customizable domains such as:
-• Education
+Outputs:
+- Top theme label  
+- Theme confidence score  
+- Score breakdown for each candidate theme  
 
-• Technology
+### 3. Text Summarization
 
-• Healthcare
+Model: **sshleifer/distilbart-cnn-12-6**  
+Generates summaries for:
+- Entire datasets  
+- Theme-specific subsets  
 
-• Finance
+### 4. Token-Level Explainability
 
-• Entertainment
+Uses transformer attention weights to compute token contributions toward sentiment.
 
-• AI
+### 5. Batch CSV Analysis
 
-• User Experience
-
-Outputs include the top theme, theme confidence, and a score breakdown for all candidate themes.
-
-3. Text Summarization
-
-Uses DistilBART CNN (sshleifer/distilbart-cnn-12-6) to summarize:
-• Entire datasets
-• Theme-specific text groups
-
-4. Token-Level Explainability
-
-Computes token contributions using attention weights and sentiment direction.
-This helps users understand why the model selected a particular sentiment prediction.
-
-5. Batch CSV Analysis
-
-Users can upload a CSV containing a “text” column.
 For each entry, the system:
-• Predicts sentiment
-• Assigns themes
-• Computes scores
-• Generates summaries
-• Produces WordClouds and visual statistics
+- Predicts sentiment  
+- Assigns a theme  
+- Computes scores  
+- Generates summaries  
+- Produces WordClouds and analytics  
 
-6. Visualizations
+### 6. Visualizations
 
 Includes:
-• Sentiment distribution (Pie chart)
-• Theme distribution (Bar chart)
-• WordClouds for each theme
+- Sentiment distribution (Pie chart)  
+- Theme distribution (Bar chart)  
+- WordClouds per theme  
 
-7. Model Evaluation
+### 7. Model Evaluation
 
-Includes utilities to compute:
-• Accuracy
-• Precision
-• Recall
-• F1-score
-• Confusion matrix
-• Classification report
-
-Useful for validating system performance on labeled datasets.
+Provides:
+- Accuracy  
+- Precision  
+- Recall  
+- F1-score  
+- Confusion matrix  
+- Classification report  
 
 ## Models Used
-Sentiment Model
 
-distilbert-base-uncased-finetuned-sst-2-english
-A distilled BERT model fine-tuned on SST-2.
+### Sentiment Model
+**distilbert-base-uncased-finetuned-sst-2-english**  
+Distilled BERT fine-tuned on SST-2.
 
-Theme Model (Zero-Shot)
+### Thematic Model (Zero-Shot)
+**facebook/bart-large-mnli**  
+BART model trained on MNLI for zero-shot classification.
 
-facebook/bart-large-mnli
-Based on BART trained on MNLI, ideal for natural language inference and zero-shot tasks.
+### Summarization Model
+**sshleifer/distilbart-cnn-12-6**  
+Distilled BART trained on CNN/DailyMail.
 
-Summarization Model
+## Tech Stack
 
-sshleifer/distilbart-cnn-12-6
-A compressed BART model trained on CNN/DailyMail.
+- Python  
+- Streamlit  
+- Hugging Face Transformers  
+- PyTorch  
+- Plotly Express  
+- Matplotlib  
+- WordCloud  
+- Pandas & NumPy  
+- scikit-learn  
 
-Tech Stack
+## Project Structure
 
-Python
-Streamlit
-Hugging Face Transformers
-PyTorch
-Plotly Express
-Matplotlib
-WordCloud
-Pandas, NumPy
-scikit-learn
-
-Project Structure
-
+```
 TextInsight/
 ├── app.py
 ├── model_pipeline.py
@@ -127,26 +115,34 @@ TextInsight/
 ├── evaluation_data.csv
 ├── requirements.txt
 └── README.md
+```
 
-Running the Application
+## Running the Application
 
 Install dependencies:
+
+```
 pip install -r requirements.txt
+```
 
-Run the Streamlit application:
+Run the application:
+
+```
 streamlit run app.py
+```
 
-Running Evaluation
+## Running Evaluation
 
 Prepare a CSV with:
 
-text
+- text  
+- true_sentiment  
+- true_theme  
 
-true_sentiment
+Then run:
 
-true_theme
-
-Run:
+```
 python3 model_evaluation.py
+```
 
-This outputs accuracy, precision, recall, F1-score, and confusion matrices.
+This prints accuracy, precision, recall, F1-score, and confusion matrices.
