@@ -1,156 +1,141 @@
-Sentiment and Thematic Analysis System
+TextInsight: Transformer-Based Sentiment and Thematic Analysis System
 
-This project is a multi-task NLP system that performs sentiment analysis, thematic (zero-shot) classification, text summarization, token-level explainability, and dataset-level analytics. It provides an end-to-end workflow from text preprocessing to visual insights and is deployed through a Streamlit-based interactive dashboard.
+TextInsight is a transformer-driven NLP system that performs sentiment classification, thematic zero-shot categorization, text summarization, explainability, and dataset-level analytics. The application integrates multiple pre-trained models into a unified pipeline and provides an interactive Streamlit dashboard for analysis.
 
 Overview
 
-This system analyzes user-generated text such as reviews, feedback, and short documents. It uses transformer-based models to determine sentiment, identify underlying themes, generate summaries, and explain predictions at a token level.
+The system is designed to analyze user-generated text such as reviews, feedback, and short documents. It uses modern transformer architectures to:
 
-The application supports:
+• Classify sentiment
+• Identify themes using zero-shot inference
+• Generate summaries
+• Provide token-level explanations
+• Support batch-level analytics and visualization
 
-Single text analysis
-Batch analysis using CSV files
-Token-level contribution visualization
-Theme-wise summaries
-WordCloud generation
-Pie and bar chart visualizations
-Evaluation using labeled datasets
+Both single-text and CSV-based analysis workflows are supported.
 
-This project combines multiple transformer models into a single unified analytics tool.
-
-Features
+Key Features
 1. Sentiment Analysis
 
-Uses the DistilBERT SST-2 fine-tuned model to classify text as positive or negative.
-Output includes:
-    a. Sentiment label
-    b. Confidence score
-    c. Token-level explanation using attention-based scoring
+Uses the DistilBERT SST-2 model (distilbert-base-uncased-finetuned-sst-2-english) to classify text as Positive or Negative.
+
+Outputs include:
+• Sentiment label
+• Confidence score
+• Token-level explanation using attention-based scoring
 
 2. Thematic Classification (Zero-Shot)
 
-Uses a DistilBART MNLI model to infer themes without any training.
-Supported themes include domains like:
-education, technology, healthcare, finance, entertainment, AI, user experience
+Uses BART-large-MNLI (facebook/bart-large-mnli) for theme prediction without any fine-tuning.
 
-Outputs include:
-    a. Top theme label
-    b. Theme confidence score
-    c. Score breakdown for all candidate themes
+Supports customizable domains such as:
+• Education
+• Technology
+• Healthcare
+• Finance
+• Entertainment
+• AI
+• User Experience
+
+Outputs include the top theme, theme confidence, and a score breakdown for all candidate themes.
 
 3. Text Summarization
 
-Uses DistilBART CNN model to generate concise summaries of:
-An entire dataset
-Individual theme groups
-Summaries condense the overall meaning while preserving key insights.
+Uses DistilBART CNN (sshleifer/distilbart-cnn-12-6) to summarize:
+• Entire datasets
+• Theme-specific text groups
 
 4. Token-Level Explainability
 
-The system computes token contributions using attention weights and sentiment direction, enabling explainable NLP. This allows users to understand why the model chose a particular sentiment.
+Computes token contributions using attention weights and sentiment direction.
+This helps users understand why the model selected a particular sentiment prediction.
 
-5. Batch Analysis (CSV Processing)
+5. Batch CSV Analysis
 
-Users can upload a CSV file containing a text column. For each row, the system:
-    a. Computes sentiment
-    b.Predicts themes
-    c. Aggregates statistics
-    d. Generates summaries
-    e. Creates WordCloud visualizations
+Users can upload a CSV containing a “text” column.
+For each entry, the system:
+• Predicts sentiment
+• Assigns themes
+• Computes scores
+• Generates summaries
+• Produces WordClouds and visual statistics
 
 6. Visualizations
 
-Using Plotly and Matplotlib, the system displays:
-    Sentiment distribution
-    Theme frequency distribution
-    WordClouds for each theme
-These help present insights in an interpretable format.
+Includes:
+• Sentiment distribution (Pie chart)
+• Theme distribution (Bar chart)
+• WordClouds for each theme
 
 7. Model Evaluation
 
-The project includes evaluation functions to calculate:
+Includes utilities to compute:
+• Accuracy
+• Precision
+• Recall
+• F1-score
+• Confusion matrix
+• Classification report
 
-    Accuracy
-    Precision
-    Recall
-    F1-score
-    Confusion matrix
-    Classification report
-
-This supports formal assessment using labeled datasets.
+Useful for validating system performance on labeled datasets.
 
 Models Used
 Sentiment Model
 
 distilbert-base-uncased-finetuned-sst-2-english
-A distilled version of BERT fine-tuned on the SST-2 dataset.
-Provides efficient and accurate sentiment classification.
+A distilled BERT model fine-tuned on SST-2.
 
 Theme Model (Zero-Shot)
 
-typeform/distilbert-base-uncased-mnli
-Distilled from a BART MNLI model for natural language inference.
-Enables theme prediction without labeled training data.
+facebook/bart-large-mnli
+Based on BART trained on MNLI, ideal for natural language inference and zero-shot tasks.
 
 Summarization Model
 
 sshleifer/distilbart-cnn-12-6
-A compressed version of BART fine-tuned on CNN/DailyMail.
-Used for abstractive summarization.
+A compressed BART model trained on CNN/DailyMail.
 
 Tech Stack
 
-    Python
-    Streamlit for the interactive UI
-    Hugging Face Transformers
-    PyTorch
-    Plotly Express
-    Matplotlib
-    WordCloud
-    Pandas and NumPy
-    scikit-learn (evaluation metrics)
+Python
+Streamlit
+Hugging Face Transformers
+PyTorch
+Plotly Express
+Matplotlib
+WordCloud
+Pandas, NumPy
+scikit-learn
 
-File Structure
-project/
-│
-├── app.py                     # Streamlit web application
-├── model_pipeline.py          # Core model logic and evaluation utilities
-├── evaluation_data.csv        # Optional test dataset
-├── model_evaluation.py        # Script to compute evaluation metrics
-├── requirements.txt           # Dependencies for deployment
-└── README.md                  # Project documentation
+Project Structure
+
+TextInsight/
+├── app.py
+├── model_pipeline.py
+├── model_evaluation.py
+├── evaluation_data.csv
+├── requirements.txt
+└── README.md
 
 Running the Application
 
-    Install requirements:
-
-    pip install -r requirements.txt
-
+Install dependencies:
+pip install -r requirements.txt
 
 Run the Streamlit application:
+streamlit run app.py
 
-    streamlit run app.py
+Running Evaluation
 
-    Running Evaluation
+Prepare a CSV with:
 
-Prepare a CSV containing:
+text
 
-    1. text
-    2. true_sentiment
-    3. true_theme
+true_sentiment
+
+true_theme
 
 Run:
 python3 model_evaluation.py
 
-
-The script prints accuracy, precision, recall, F1-score, and confusion matrices.
-
-Use Cases
-    This system is suitable for:
-    Customer feedback analysis
-    Product review mining
-    Education technology analytics
-    Market research
-    Sentiment-driven insights
-    Zero-shot thematic tagging
-    Explainable AI demonstrations
+This outputs accuracy, precision, recall, F1-score, and confusion matrices.
