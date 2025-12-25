@@ -1,6 +1,6 @@
-# TextInsight: Transformer-Based Sentiment and Thematic Analysis System
+# Text In Sight: Transformers Based Sentiment and Thematic Analysis System
 
-TextInsight is a transformer-driven NLP system that performs sentiment classification, thematic zero-shot categorization, summarization, token-level explainability, and dataset-level analytics. The project integrates multiple pre-trained transformer models into a unified pipeline and provides an interactive Streamlit dashboard for real-time analysis.
+TextInsight is a transformer driven NLP system that performs sentiment classification, thematic zero shot categorization, summarization, token-level explainability, and dataset level analytics. The project integrates multiple pre-trained transformer models into a unified pipeline and provides an interactive Streamlit dashboard for real-time analysis.
 
 <p align="center">
   <img width="700" alt="Image" src="https://github.com/user-attachments/assets/3d6ead4a-2e61-4381-a852-7057c338d498" />
@@ -150,3 +150,5 @@ python3 model_evaluation.py
 ```
 
 This prints accuracy, precision, recall, F1-score, and confusion matrices.
+
+## Made by SHIVANSH TRIPATHI
